@@ -1,2 +1,2 @@
-TwitterSplitter
+TweetSplitter
 ===============
