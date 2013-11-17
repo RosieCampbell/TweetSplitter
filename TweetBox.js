@@ -5,7 +5,7 @@ function TweetBox(idNum){
 	this.domElement.className = "form-control";
 	this.domElement.rows = "3"
 
-	$("#tweets").append("<div id = 'tweetColumn" + idNum + "' class='col-xs-8 column'></div><div class='col-xs-4 column'><div class='row clearfix'><a class='btn btn-primary' id='custom-tweet-button" + idNum + "' href='http://twitter.com/intent/tweet'>Tweet</a></div><div class='row clearfix'><label id='count" + idNum + "' for='tweet'></label></div><script> document.getElementById('custom-tweet-button" + idNum + "').addEventListener('click', function (el) { var tweet = ($('#tweet" + idNum + "').val()); el.target.href += '?text=' +  tweet});</script></div>");
+	$("#tweets").append("<div id = 'tweetColumn" + idNum + "' class='col-xs-8 column'></div><div id= 'buttons" + idNum + "' class='col-xs-4 column'><div class='row clearfix'><a class='btn btn-primary' id='custom-tweet-button" + idNum + "' href='http://twitter.com/intent/tweet'>Tweet</a></div><div  class='row clearfix'><label id='count" + idNum + "' for='tweet'></label></div><script> document.getElementById('custom-tweet-button" + idNum + "').addEventListener('click', function (el) { var tweet = ($('#tweet" + idNum + "').val()); el.target.href += '?text=' +  tweet});</script></div>");
 	document.getElementById("tweetColumn" + idNum + "").appendChild(this.domElement);
 
 	this.charLength = function (){
@@ -23,8 +23,16 @@ function TweetBox(idNum){
 	function onInput(){
 		document.getElementById('count' + idNum).innerHTML = self.charLength();
 		self.checkMaxLength();
+		self.isEmpty();
 	}
 	
-
+	this.isEmpty = function(){
+		if(this.charLength() === 0){
+			var currentIndex = tweetBoxes.indexOf(self);
+			tweetBoxes[currentIndex-1].domElement.focus();
+			document.getElementById("tweets").removeChild(document.getElementById("tweetColumn" + idNum));
+			document.getElementById("tweets").removeChild(document.getElementById("buttons" + idNum));
+		}
+	}
 }
 
