@@ -6,7 +6,7 @@ function TweetBox(id){
 	this.domElement.className = "form-control";
 	this.domElement.rows = "3"
 
-	$("#tweets").append("<div id = 'tweetColumn" + this.idNum + "' class='col-xs-8 column'></div><div id= 'buttons" + this.idNum + "' class='col-xs-4 column'><div class='row clearfix'><a class='btn btn-primary' id='custom-tweet-button" + this.idNum + "' href='http://twitter.com/intent/tweet'>Tweet</a></div><div  class='row clearfix'><label id='count" + this.idNum + "' for='tweet'></label></div><script> document.getElementById('custom-tweet-button" + this.idNum + "').addEventListener('click', function (el) { var tweet = ($('#tweet" + this.idNum + "').val()); el.target.href += '?text=' +  tweet});</script></div>");
+	$("#tweets").append("<div id = 'tweetColumn" + this.idNum + "' class='col-xs-8 column'></div><div id= 'buttons" + this.idNum + "' class='col-xs-4 column'><div class='row clearfix'><a class='btn btn-primary' id='custom-tweet-button" + this.idNum + "' >Tweet</a></div><div  class='row clearfix'><label id='count" + this.idNum + "' for='tweet'></label></div><script> document.getElementById('custom-tweet-button" + this.idNum + "').addEventListener('click', function (el) {  el.target.href = ''; var tweet = ($('#tweet" + this.idNum + "').val()); el.target.href = href='http://twitter.com/intent/tweet?text=' +  tweet});</script></div>");
 	document.getElementById("tweetColumn" + this.idNum + "").appendChild(this.domElement);
 
 	this.charLength = function (){
