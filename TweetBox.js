@@ -26,13 +26,25 @@ function TweetBox(id){
 			$.each(tweetBoxes, function(){
 				$('#wrapper').append(this.tweetWrapper);
 			});
+			//tweetBox.domElement
 			tweetbox.domElement.focus();
+			self.countURLs();
 		}
 	}
 
 
 	function onInput(){
-		document.getElementById('count' + self.idNum).innerHTML = self.charLength();
+		var urls = self.countURLs();
+		var urlChars = 0;
+		var adjustment= 0;
+		if(urls){
+			for (var i = urls.length - 1; i >= 0; i--) {
+				urlChars += urls[i].length;
+			};
+			adjustment = urls.length*23;
+		}
+		var chars = self.charLength() - urlChars + adjustment;
+		document.getElementById('count' + self.idNum).innerHTML = chars;
 		self.checkMaxLength();
 		self.isEmpty();
 
@@ -47,6 +59,13 @@ function TweetBox(id){
 				document.getElementById("wrapper").removeChild(document.getElementById("tweets" + this.idNum));
 			}
 		}
+	}
+
+	this.countURLs = function(){
+		var str = this.domElement.value;
+		var re = /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi;
+		var res = str.match(re);
+		return res;
 	}
 }
 
