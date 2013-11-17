@@ -1,10 +1,15 @@
-function TweetBox(id){
+function TweetBox(id, index){
 	var self = this;
 	this.idNum = id;
 	this.domElement = document.createElement("textarea");
 	this.domElement.id = "tweet"+idNum;
 	this.domElement.className = "form-control";
 	this.domElement.rows = "3"
+	this.index = index;
+	tweetBoxes.splice(this.index, 0, this);
+	this.humanIndex = this.index + 1;
+	this.currentCountTag = " (" + this.humanIndex + "/" + tweetBoxes.length + ")"
+	this.domElement.value += this.currentCountTag;
 
 	$("#wrapper").append("<div id='tweets" + this.idNum + "' class='row clearfix'><div id = 'tweetColumn" + this.idNum + "' class='col-xs-8 column'></div><div id= 'buttons" + this.idNum + "' class='col-xs-4 column'><div class='row clearfix'><a class='btn btn-primary' id='custom-tweet-button" + this.idNum + "' >Tweet</a></div><div  class='row clearfix'><label id='count" + this.idNum + "' for='tweet'></label></div><script> document.getElementById('custom-tweet-button" + this.idNum + "').addEventListener('click', function (el) {  el.target.href = ''; var tweet = ($('#tweet" + this.idNum + "').val()); el.target.href = href='http://twitter.com/intent/tweet?text=' +  tweet});</script></div></div>");
 	document.getElementById("tweetColumn" + this.idNum + "").appendChild(this.domElement);
@@ -21,17 +26,20 @@ function TweetBox(id){
 	this.checkMaxLength = function() {
 		if(self.charLength() === 140){
 			idNum++;
-			var tweetbox = new TweetBox(idNum);
-			tweetBoxes.splice(tweetBoxes.indexOf(self)+1, 0, tweetbox);
+			var index = tweetBoxes.indexOf(self)+1;
+			var tweetbox = new TweetBox(idNum, index);
+			var i = 1;
 			$.each(tweetBoxes, function(){
 				$('#wrapper').append(this.tweetWrapper);
+				this.newCountTag = " (" + i + "/" + tweetBoxes.length + ")";
+				this.domElement.value = this.domElement.value.replace(this.currentCountTag,this.newCountTag);
+				this.currentCountTag = this.newCountTag;
+				i++;
 			});
-			//tweetBox.domElement
 			tweetbox.domElement.focus();
 			self.countURLs();
 		}
 	}
-
 
 	function onInput(){
 		var urls = self.countURLs();
@@ -57,6 +65,14 @@ function TweetBox(id){
 				tweetBoxes[currentIndex-1].domElement.focus();
 				tweetBoxes.splice(currentIndex,1);
 				document.getElementById("wrapper").removeChild(document.getElementById("tweets" + this.idNum));
+				var i = 1;
+				$.each(tweetBoxes, function(){
+					$('#wrapper').append(this.tweetWrapper);
+					this.newCountTag = " (" + i + "/" + tweetBoxes.length + ")";
+					this.domElement.value = this.domElement.value.replace(this.currentCountTag,this.newCountTag);
+					this.currentCountTag = this.newCountTag;
+					i++;
+				});
 			}
 		}
 	}
