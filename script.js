@@ -5,3 +5,10 @@ $(function(){
 	tweetBoxes.push(tweetBox);
 });
 
+function CheckEmpties(){
+	for (var i = tweetBoxes.length - 1; i >= 0; i--) {
+		if(tweetBoxes[i].value.trim === ""){
+
+		}
+	}
+}
