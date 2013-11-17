@@ -1,7 +1,7 @@
 function TweetBox(idNum){
 	var self = this;
 	this.domElement = document.createElement("textarea");
-	this.domElement.id = "tweet";
+	this.domElement.id = "tweet"+idNum;
 	this.domElement.className = "form-control";
 	this.domElement.rows = "3"
 
@@ -17,6 +17,7 @@ function TweetBox(idNum){
 		if(self.charLength() === 140){
 			var tweetbox = new TweetBox(idNum+1);
 			tweetbox.domElement.focus();
+			tweetBoxes.push(tweetbox);
 		}
 	}
 	function onInput(){
@@ -24,6 +25,6 @@ function TweetBox(idNum){
 		self.checkMaxLength();
 	}
 	
-	
+
 }
 

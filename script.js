@@ -1,7 +1,6 @@
 var tweetBoxes = [];
 $(function(){
-
-	var tweetBox0 = new TweetBox(0);
-
+	var tweetBox = new TweetBox(0);
+	tweetBoxes.push(tweetBox);
 });
 
