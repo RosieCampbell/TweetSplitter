@@ -42,5 +42,7 @@ function parseTweetString(){
 	}
 	for (var i = 0; i < tweetBoxes.length; i++) {
 		tweetBoxes[i].domElement.value = boxes[i];
+		document.getElementById('count' + tweetBoxes[i].idNum).innerHTML = tweetBoxes[i].domElement.value.length;
+
 	};
 }

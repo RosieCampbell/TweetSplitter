@@ -56,25 +56,6 @@ function TweetBox(id, index){
 
 	}
 
-	this.isEmpty = function(){
-		if(this.charLength() === 0){
-			var currentIndex = tweetBoxes.indexOf(self);
-			if(currentIndex !== 0){
-				tweetBoxes[currentIndex-1].domElement.focus();
-				tweetBoxes.splice(currentIndex,1);
-				document.getElementById("wrapper").removeChild(document.getElementById("tweets" + this.idNum));
-				var i = 1;
-				$.each(tweetBoxes, function(){
-					$('#wrapper').append(this.tweetWrapper);
-					this.newCountTag = " (" + i + "/" + tweetBoxes.length + ")";
-					this.domElement.value = this.domElement.value.replace(this.currentCountTag,this.newCountTag);
-					this.currentCountTag = this.newCountTag;
-					i++;
-				});
-			}
-		}
-	}
-
 	this.countURLs = function(){
 		var str = this.domElement.value;
 		var re = /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi;
