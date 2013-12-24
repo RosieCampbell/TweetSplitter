@@ -2,6 +2,7 @@ function TweetBox(id, index){
 	var self = this;
 	this.idNum = id;
 	this.domElement = document.createElement("textarea");
+	this.domElement.disabled = true;
 	this.domElement.id = "tweet"+idNum;
 	this.domElement.className = "form-control";
 	this.domElement.rows = "3"
@@ -19,9 +20,6 @@ function TweetBox(id, index){
 	this.charLength = function (){
 		return this.domElement.value.length;
 	}
-	
-	this.domElement.addEventListener("input", onInput, false);
-	this.domElement.addEventListener('keyup', this.isEmpty, false);
 
 	this.checkMaxLength = function() {
 		if(self.charLength() === 140){
