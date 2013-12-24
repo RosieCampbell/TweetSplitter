@@ -6,6 +6,7 @@ $(function(){
 });
 
 function onInput(){
+	document.getElementById('count').innerHTML = document.getElementById('draft').value.length;
 	splitTweets();
 }
 
@@ -16,20 +17,20 @@ function splitTweets(){
 function parseTweetString(){
 	var boxes = [];
 	var words = [];
-	var charCount = 0;
 	var j = 0;
 
 	words = document.getElementById('draft').value.split(" ");
-	var tempTweet = "";
+	var tempTweet = [];
 	for (var i = 0; i < words.length; i++) {
-		charCount += words[i].length;
-		tempTweet += words[i] + " ";
-		console.log(tempTweet);
-		boxes[j] = tempTweet;
-		if(charCount >= 140){
+		tempTweet.push(words[i]);
+		if(tempTweet.join(" ").length < 140){
+			boxes[j] = tempTweet.join(" ");
+		}else{
+			tempTweet.pop();
+			boxes[j] = tempTweet.join(" ");
+			tempTweet = [];
+			tempTweet.push(words[i]);
 			j++;
-			tempTweet = "";
-			charCount = 0;
 		}
 	};
 
