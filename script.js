@@ -49,3 +49,28 @@ function parseTweetString(){
 
 	};
 }
+
+
+function urls(){
+	var urls = countURLs();
+	var urlChars = 0;
+	var adjustment= 0;
+	if(urls){
+		for (var i = urls.length - 1; i >= 0; i--) {
+			urlChars += urls[i].length;
+		};
+		adjustment = urls.length*23;
+	}
+	var chars = self.charLength() - urlChars + adjustment;
+	document.getElementById('count' + self.idNum).innerHTML = chars;
+	self.checkMaxLength();
+	self.isEmpty();
+
+}
+
+function countURLs(){
+	var str = this.domElement.value;
+	var re = /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi;
+	var res = str.match(re);
+	return res;
+}
