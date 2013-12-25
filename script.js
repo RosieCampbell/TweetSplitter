@@ -49,9 +49,3 @@ function parseTweetString(){
 
 	};
 }
-
-function updateTweetCount(){
-	for (var i = 0; i < tweetBoxes.length; i++) {
-		tweetBoxes[i].domElement.value += "(" + i + "/" + tweetBoxes.length + ")";
-	};
-}
