@@ -23,7 +23,7 @@ function parseTweetString(){
 	var tempTweet = [];
 	for (var i = 0; i < words.length; i++) {
 		tempTweet.push(words[i]);
-		if(tempTweet.join(" ").length < 140){
+		if(tempTweet.join(" ").length < 134){
 			boxes[j] = tempTweet.join(" ");
 		}else{
 			tempTweet.pop();
@@ -43,7 +43,15 @@ function parseTweetString(){
 	}
 	for (var i = 0; i < tweetBoxes.length; i++) {
 		tweetBoxes[i].domElement.value = boxes[i];
+		var tweetCount = i + 1;
+		tweetBoxes[i].domElement.value += " (" + tweetCount + "/" + tweetBoxes.length + ")";
 		document.getElementById('count' + tweetBoxes[i].idNum).innerHTML = tweetBoxes[i].domElement.value.length;
 
+	};
+}
+
+function updateTweetCount(){
+	for (var i = 0; i < tweetBoxes.length; i++) {
+		tweetBoxes[i].domElement.value += "(" + i + "/" + tweetBoxes.length + ")";
 	};
 }
